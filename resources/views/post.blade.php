@@ -3,7 +3,7 @@
 @section('body')
 <div class="container">
     <h1>Post</h1>
-    <a href="" class="btn btn-success mb-3">Create Post</a>
+    <a href="/AddPost" class="btn btn-success mb-3">Create Post</a>
     <table class="table">
         <thead>
             <tr>

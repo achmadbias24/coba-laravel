@@ -3,7 +3,7 @@
 @section('body')
 <div class="container">
     <h1>Accounts</h1>
-    <a href="" class="btn btn-success mb-3">Create Account</a>
+    <a href="/AddAccount" class="btn btn-success mb-3">Create Account</a>
     <table class="table">
         <thead>
             <tr>
@@ -15,17 +15,22 @@
             </tr>
         </thead>
         <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>admin</td>
-                    <td>admin</td>
-                    <td>admin</td>
-                    <td>
-                        <a href="/LihatAccount" class="btn btn-success">Lihat</a>
-                        <a href="/EditAccount" class="btn btn-primary">Edit</a>
-                        <a href="" class="btn btn-danger">Hapus</a>
-                    </td>
-                </tr>
+            <?php $no=1; ?>  
+            @foreach ($accounts as $account)  
+            <tr>
+                <th scope="row"><?=$no; ?></th>
+                <td>{{ $account->username }}</td>
+                <td>{{ $account->name }}</td>
+                <td>{{ $account->role }}</td>
+                <td>
+                    <a href="/LihatAccount/{{ $account->username }}" class="btn btn-success">Lihat</a>
+                    <a href="/EditAccount/{{ $account->username }}" class="btn btn-primary">Edit</a>
+                    <a href="" class="btn btn-danger">Hapus</a>
+                </td>
+            </tr>
+            
+            <?php $no++; ?>  
+            @endforeach
         </tbody>
     </table>
 </div>

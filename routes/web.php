@@ -21,8 +21,10 @@ Route::get('/', function () {
     ]);
 });
 Route::get('/account', [AccountController::class, 'index']);
-Route::get('/EditAccount', [AccountController::class, 'EditAccount']);
-Route::get('/LihatAccount', [AccountController::class, 'LihatAccount']);
+Route::get('/AddAccount', [AccountController::class, 'AddAccount']);
+Route::get('/EditAccount/{account:username}', [AccountController::class, 'EditAccount']);
+Route::get('/LihatAccount/{account:username}', [AccountController::class, 'LihatAccount']);
 Route::get('/post', [PostController::class, 'index']);
+Route::get('/AddPost', [PostController::class, 'AddPost']);
 Route::get('/EditPost', [PostController::class, 'EditPost']);
 Route::get('/LihatPost', [PostController::class, 'LihatPost']);

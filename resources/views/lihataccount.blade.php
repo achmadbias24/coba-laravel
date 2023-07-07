@@ -1,8 +1,8 @@
-
 @extends('layout.main')
 @section('body')
 <div class="container">
-    <h1></h1>
+    <h1>{{ $accounts->name }}</h1>
+    <a href="/account" class="btn btn-secondary mb-3">Kembali</a>
     <a href="/EditAccount" class="btn btn-primary mb-3">Update</a>
     <a href="#" class="btn btn-danger mb-3">Hapus</a>
     <table class="table">
@@ -17,12 +17,12 @@
         </thead>
         <tbody>
             <tr>
-                
-                    <th scope="row">1</th>
-                    <td>admin</td>
-                    <td>admin</td>
-                    <td>admin</td>
-               
+                <?php $no=1;?>
+                    <th scope="row">{{ $no }}</th>
+                    <td>{{ $accounts->username }}</td>
+                    <td>{{ $accounts->name }}</td>
+                    <td>{{ $accounts->role }}</td>
+               <?php $no++; ?>
             </tr>
         </tbody>
     </table>

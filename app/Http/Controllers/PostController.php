@@ -12,6 +12,12 @@ class PostController extends Controller
             "title" => "Account"
         ]);
     }
+    function AddPost()
+    {
+        return view('addpost', [
+            "title" => "Tambah Post"
+        ]);
+    }
     function LihatPost()
     {
         return view('lihatpost', [

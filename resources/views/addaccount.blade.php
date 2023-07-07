@@ -1,14 +1,11 @@
-{{-- @dd($accounts) --}}
 @extends('layout.main')
 @section('body')
 <div class="container">
-    <h1 class="mt-3">Edit Akun : {{ $accounts->name }}</h1>
-    <a href="/account" class="btn btn-secondary mb-3">Kembali</a>
-
+    <h1>Create user</h1>
     <form method="post" action="">
         <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" class="form-control" name="username" value="{{ $accounts->username }}" readonly>
+            <input type="text" class="form-control" name="username">
         </div>
         <div class="form-group">
             <label for="password">password</label>
@@ -16,13 +13,13 @@
         </div>
         <div class="form-group">
             <label for="name">name</label>
-            <input type="text" class="form-control" value="{{ $accounts->username }}" name="name">
+            <input type="text" class="form-control" name="name">
         </div>
         <div>
             <label for="role">role</label>
-            <input type="text" class="form-control" value="{{ $accounts->username }}" name="role">
+            <input type="text" class="form-control" name="role">
         </div>
-        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-</div>
+</div>   
 @endsection
