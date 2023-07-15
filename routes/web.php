@@ -27,4 +27,4 @@ Route::get('/LihatAccount/{account:username}', [AccountController::class, 'Lihat
 Route::get('/post', [PostController::class, 'index']);
 Route::get('/AddPost', [PostController::class, 'AddPost']);
 Route::get('/EditPost', [PostController::class, 'EditPost']);
-Route::get('/LihatPost', [PostController::class, 'LihatPost']);
+Route::get('/LihatPost/{post:idpost}', [PostController::class, 'LihatPost']);

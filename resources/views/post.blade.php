@@ -1,3 +1,4 @@
+
 @extends('layout.main')
 
 @section('body')
@@ -16,19 +17,20 @@
             </tr>
         </thead>
         <tbody>
+            @foreach($post as $pos)
             
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Ini percobaan</td>
-                    <td>Percobaan Laravel</td>
-                    <td>2023-07-05 21:02:00</td>
-                    <td>Admin</td>
-                    <td><a href="/LihatPost" class="btn btn-success">Lihat</a>
+                    <th scope="row">{{ $pos->idpost }}</th>
+                    <td>{{ $pos->judul }}</td>
+                    <td>{{ $pos->content }}</td>
+                    <td>{{ $pos->created_at }}</td>
+                    <td>{{ $pos->account->name }}</td>
+                    <td><a href="/LihatPost/{{ $pos->idpost }}" class="btn btn-success">Lihat</a>
                         <a href="/EditPost" class="btn btn-primary">Edit</a>
                         <a href="" class="btn btn-danger">Hapus</a>
                     </td>
                 </tr>
-           
+           @endforeach
         </tbody>
     </table>
 </div>

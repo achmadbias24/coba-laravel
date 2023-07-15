@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
 
 class PostController extends Controller
 {
     function index()
     {
         return view('post', [
-            "title" => "Account"
+            "title" => "Account",
+            "post" => Post::all()
         ]);
     }
     function AddPost()
@@ -18,10 +20,11 @@ class PostController extends Controller
             "title" => "Tambah Post"
         ]);
     }
-    function LihatPost()
+    function LihatPost(Post $post)
     {
         return view('lihatpost', [
-            "title" => "Lihat Post"
+            "title" => "Lihat Post",
+            "posts" => $post
         ]);
     }
     function EditPost()
