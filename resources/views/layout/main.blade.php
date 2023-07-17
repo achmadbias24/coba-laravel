@@ -50,7 +50,7 @@
 
 </body>
 <!-- Footer -->
-<footer class="page-footer font-small fixed-bottom">
+<footer class="page-footer font-small">
 
     <!-- Copyright -->
     <div class="footer-copyright my-auto ml-3">© My Company 2023

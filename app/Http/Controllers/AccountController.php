@@ -12,7 +12,7 @@ class AccountController extends Controller
     {
         return view('account', [
             "title" => "Account",
-            "accounts" => Account::all()
+            "accounts" => Account::search(request(['search']))->paginate(5)
         ]);
     }
     function AddAccount()
@@ -20,6 +20,18 @@ class AccountController extends Controller
         return view('addaccount', [
             "title" => "Tambah Account"
         ]);
+    }
+    public function create(Request $request)
+    {
+        $validated = $request->validate([
+            'username' => 'alpha_num|min:8|unique:account',
+            'password' => 'alpha_num|min:8',
+            'name' => 'min:2',
+            'role' => 'min:5'
+        ]);
+        $validated['password'] = bcrypt($validated['password']);
+        Account::create($validated);
+        return redirect('/account');
     }
     function LihatAccount(Account $account)
     {

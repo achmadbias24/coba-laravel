@@ -22,6 +22,7 @@ Route::get('/', function () {
 });
 Route::get('/account', [AccountController::class, 'index']);
 Route::get('/AddAccount', [AccountController::class, 'AddAccount']);
+Route::post('/AddAccount', [AccountController::class, 'create']);
 Route::get('/EditAccount/{account:username}', [AccountController::class, 'EditAccount']);
 Route::get('/LihatAccount/{account:username}', [AccountController::class, 'LihatAccount']);
 Route::get('/post', [PostController::class, 'index']);

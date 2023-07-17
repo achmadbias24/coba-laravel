@@ -11,7 +11,7 @@ class PostController extends Controller
     {
         return view('post', [
             "title" => "Account",
-            "post" => Post::all()
+            "post" => Post::with('account')->search(request(['search']))->latest()->paginate(5)
         ]);
     }
     function AddPost()

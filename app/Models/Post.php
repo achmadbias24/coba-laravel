@@ -13,4 +13,11 @@ class Post extends Model
     {
         return $this->belongsTo(Account::class);
     }
+    public function scopeSearch($query, array $filters)
+    {
+        $query->when($filters['search'] ?? false, function ($query, $search) {
+            return $query->where('judul', 'like', '%' . $search . '%')
+                ->orWhere('content', 'like', '%' . $search . '%');
+        });
+    }
 }

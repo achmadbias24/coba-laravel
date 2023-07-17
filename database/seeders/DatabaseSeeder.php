@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Account::factory(12)->create();
-        Post::factory(3)->create();
+        // Account::factory(12)->create();
+        Post::factory(5)->create();
 
         // Account::create([
         //     'username' => 'admin',

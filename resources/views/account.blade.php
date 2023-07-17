@@ -3,7 +3,19 @@
 @section('body')
 <div class="container">
     <h1>Accounts</h1>
-    <a href="/AddAccount" class="btn btn-success mb-3">Create Account</a>
+    <div class="row">
+        <div class="col-md-6">
+            <a href="/AddAccount" class="btn btn-success mb-3">Create Account</a>
+        </div>
+        <div class="col-md-6">
+            <form action="/account" method="get">
+                <div class="input-group mb-3 justify-content-right">
+                    <input type="text" class="form-control" placeholder="Cari akun" name="search" value="{{ request('search') }}">
+                    <button class="btn btn-primary" type="submit" id="button-addon2">Cari</button>
+                </div>
+            </form>
+        </div>
+    </div>
     <table class="table">
         <thead>
             <tr>
@@ -15,10 +27,9 @@
             </tr>
         </thead>
         <tbody>
-            <?php $no=1; ?>  
             @foreach ($accounts as $account)  
             <tr>
-                <th scope="row"><?=$no; ?></th>
+                <th scope="row">{{ $account->id }}</th>
                 <td>{{ $account->username }}</td>
                 <td>{{ $account->name }}</td>
                 <td>{{ $account->role }}</td>
@@ -29,9 +40,9 @@
                 </td>
             </tr>
             
-            <?php $no++; ?>  
             @endforeach
         </tbody>
     </table>
+    {{ $accounts->links() }}
 </div>
 @endsection
