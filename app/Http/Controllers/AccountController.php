@@ -31,6 +31,7 @@ class AccountController extends Controller
         ]);
         $validated['password'] = bcrypt($validated['password']);
         Account::create($validated);
+        $request->session()->flash('success', 'Berhasil');
         return redirect('/account');
     }
     function LihatAccount(Account $account)

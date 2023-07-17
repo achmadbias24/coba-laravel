@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AccountController;
 
@@ -15,17 +16,18 @@ use App\Http\Controllers\AccountController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome', [
-        "title" => "Home"
-    ]);
+Route::get('/', [AuthController::class, 'index'])->name('login');
+Route::post('/logout', [AuthController::class, 'logout']);
+Route::post('/login', [AuthController::class, 'authenticate'])->middleware('guest');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/account', [AccountController::class, 'index']);
+    Route::get('/AddAccount', [AccountController::class, 'AddAccount']);
+    Route::post('/AddAccount', [AccountController::class, 'create']);
+    Route::get('/EditAccount/{account:username}', [AccountController::class, 'EditAccount']);
+    Route::get('/LihatAccount/{account:username}', [AccountController::class, 'LihatAccount']);
+    Route::get('/post', [PostController::class, 'index']);
+    Route::get('/AddPost', [PostController::class, 'AddPost']);
+    Route::get('/EditPost', [PostController::class, 'EditPost']);
+    Route::get('/LihatPost/{post:idpost}', [PostController::class, 'LihatPost']);
 });
-Route::get('/account', [AccountController::class, 'index']);
-Route::get('/AddAccount', [AccountController::class, 'AddAccount']);
-Route::post('/AddAccount', [AccountController::class, 'create']);
-Route::get('/EditAccount/{account:username}', [AccountController::class, 'EditAccount']);
-Route::get('/LihatAccount/{account:username}', [AccountController::class, 'LihatAccount']);
-Route::get('/post', [PostController::class, 'index']);
-Route::get('/AddPost', [PostController::class, 'AddPost']);
-Route::get('/EditPost', [PostController::class, 'EditPost']);
-Route::get('/LihatPost/{post:idpost}', [PostController::class, 'LihatPost']);

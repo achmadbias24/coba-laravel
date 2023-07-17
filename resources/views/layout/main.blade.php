@@ -38,9 +38,19 @@
                 <li class="nav-item">
                     <a class="nav-link text-white" href="/account">Akun</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="">Logout</a>
-                </li>
+                @auth    
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                      {{ auth()->user()->name }} ({{ auth()->user()->role }})
+                    </a>
+                    <div class="dropdown-menu">
+                        <form action="/logout" method="POST">
+                            @csrf
+                            <button class="dropdown-item" type="submit">Logout</button>
+                        </form>
+                    </div>
+                  </li>
+                @endauth
             </ul>
         </div>
     </nav>

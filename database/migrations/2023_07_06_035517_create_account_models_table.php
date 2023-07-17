@@ -19,6 +19,7 @@ class CreateAccountModelsTable extends Migration
             $table->string('password');
             $table->string('name');
             $table->string('role');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
