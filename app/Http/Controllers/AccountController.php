@@ -2,26 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use App\Models\Account;
+use Illuminate\Http\Request;
 
 class AccountController extends Controller
 {
-    function index()
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
         return view('account', [
             "title" => "Account",
             "accounts" => Account::search(request(['search']))->paginate(5)
         ]);
     }
-    function AddAccount()
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
         return view('addaccount', [
             "title" => "Tambah Account"
         ]);
     }
-    public function create(Request $request)
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
         $validated = $request->validate([
             'username' => 'alpha_num|min:8|unique:account',
@@ -34,18 +51,56 @@ class AccountController extends Controller
         $request->session()->flash('success', 'Berhasil');
         return redirect('/account');
     }
-    function LihatAccount(Account $account)
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Account  $account
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Account $account)
     {
         return view('lihataccount', [
             "title" => "Lihat Account",
             "accounts" => $account
         ]);
     }
-    function EditAccount(Account $account)
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Account  $account
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Account $account)
     {
         return view('editaccount', [
             "title" => "Edit Account",
             "accounts" => $account
         ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Account  $account
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Account $account)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Account  $account
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Account $account)
+    {
+        Account::destroy($account);
+        return redirect('/account')->with('success', 'Akun Berhasil Dihapus');
     }
 }

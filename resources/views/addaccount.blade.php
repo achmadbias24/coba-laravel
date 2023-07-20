@@ -2,7 +2,7 @@
 @section('body')
 <div class="container">
     <h1>Create user</h1>
-    <form method="post" action="/AddAccount">
+    <form method="post" action="/account">
         @csrf
         <div class="form-group">
             <label for="username">Username</label>

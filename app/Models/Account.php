@@ -24,4 +24,8 @@ class Account extends Model
                 ->orWhere('username', 'like', '%' . $search . '%');
         });
     }
+    public function getRouteKeyName()
+    {
+        return 'username';
+    }
 }

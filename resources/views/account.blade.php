@@ -13,7 +13,7 @@
     @endif
     <div class="row">
         <div class="col-md-6">
-            <a href="/AddAccount" class="btn btn-success mb-3">Create Account</a>
+            <a href="/account/create" class="btn btn-success mb-3">Create Account</a>
         </div>
         <div class="col-md-6">
             <form action="/account" method="get">
@@ -42,8 +42,8 @@
                 <td>{{ $account->name }}</td>
                 <td>{{ $account->role }}</td>
                 <td>
-                    <a href="/LihatAccount/{{ $account->username }}" class="btn btn-success">Lihat</a>
-                    <a href="/EditAccount/{{ $account->username }}" class="btn btn-primary">Edit</a>
+                    <a href="/account/{{ $account->username }}" class="btn btn-success">Lihat</a>
+                    <a href="/account/{{ $account->username }}/edit" class="btn btn-primary">Edit</a>
                     <a href="" class="btn btn-danger">Hapus</a>
                 </td>
             </tr>

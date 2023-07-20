@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
-
+    protected $fillable = [
+        'judul', 'content', 'account_id'
+    ];
     public function account()
     {
         return $this->belongsTo(Account::class);

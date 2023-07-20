@@ -4,9 +4,17 @@
 @section('body')
 <div class="container">
     <h1>Post</h1>
+    @if (session()->has('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>{{ session('success') }}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      @endif
     <div class="row">
         <div class="col-md-6">
-            <a href="/AddPost" class="btn btn-success mb-3">Create Post</a>
+            <a href="/post/create" class="btn btn-success mb-3">Create Post</a>
         </div>
         <div class="col-md-6">
             <form action="/post" method="get">
@@ -32,14 +40,18 @@
             @foreach($post as $pos)
             
                 <tr>
-                    <th scope="row">{{ $pos->idpost }}</th>
+                    <th scope="row">{{ $loop->iteration }}</th>
                     <td>{{ $pos->judul }}</td>
-                    <td>{{ $pos->content }}</td>
+                    <td>{!! $pos->content !!}</td>
                     <td>{{ $pos->created_at->diffForHumans() }}</td>
                     <td>{{ $pos->account->name }}</td>
-                    <td><a href="/LihatPost/{{ $pos->idpost }}" class="btn btn-success">Lihat</a>
-                        <a href="/EditPost" class="btn btn-primary">Edit</a>
-                        <a href="" class="btn btn-danger">Hapus</a>
+                    <td><a href="/post/{{ $pos->id }}" class="btn btn-success">Lihat</a>
+                        <a href="/post/{{ $pos->id }}/edit" class="btn btn-primary">Edit</a>
+                        <form action="/post/{{ $pos->id }}" method="post" class="d-inline">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger border-0" onclick="return confirm('yakin menghapus post ini?')">Hapus</button>
+                        </form>
                     </td>
                 </tr>
            @endforeach
