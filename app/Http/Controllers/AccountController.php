@@ -48,7 +48,7 @@ class AccountController extends Controller
         ]);
         $validated['password'] = bcrypt($validated['password']);
         Account::create($validated);
-        $request->session()->flash('success', 'Berhasil');
+        $request->session()->flash('success', 'Akun Berhasil Dibuat');
         return redirect('/account');
     }
 
@@ -76,7 +76,7 @@ class AccountController extends Controller
     {
         return view('editaccount', [
             "title" => "Edit Account",
-            "accounts" => $account
+            "account" => $account
         ]);
     }
 
@@ -89,7 +89,16 @@ class AccountController extends Controller
      */
     public function update(Request $request, Account $account)
     {
-        //
+        $validated = $request->validate([
+            'username' => 'alpha_num|min:8|unique:account',
+            'password' => 'alpha_num|min:8',
+            'name' => 'min:2',
+            'role' => 'min:5'
+        ]);
+        $validated['password'] = bcrypt($validated['password']);
+        Account::where('id', $account->id)->update($validated);
+        $request->session()->flash('success', 'Akun Berhasil Diupdate');
+        return redirect('/account');
     }
 
     /**
@@ -100,7 +109,11 @@ class AccountController extends Controller
      */
     public function destroy(Account $account)
     {
-        Account::destroy($account);
-        return redirect('/account')->with('success', 'Akun Berhasil Dihapus');
+        if ($account->id == auth()->user()->id) {
+            return redirect('/account')->with('failed', 'Anda tidak dapat menghapus akun anda sendiri!');
+        } else {
+            Account::destroy($account->id);
+            return redirect('/account')->with('success', 'Akun Berhasil Dihapus');
+        }
     }
 }

@@ -39,9 +39,11 @@
                 <li class="nav-item">
                     <a class="nav-link text-white" href="/post">Post</a>
                 </li>
+                @can('admin')
                 <li class="nav-item">
                     <a class="nav-link text-white" href="/account">Akun</a>
                 </li>
+                @endcan
                 @auth    
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-expanded="false">

@@ -2,6 +2,7 @@
 @section('body')
 <div class="container">
     <h1>Edit Post</h1>
+    <a href="/post" class="btn btn-secondary">Kembali</a>
     <form action="/post/{{ $post->id }}" method="post">
         @method('put')
         @csrf

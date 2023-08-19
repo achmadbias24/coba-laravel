@@ -5,12 +5,20 @@
     <h1>Accounts</h1>
     @if (session()->has('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-        Akun <strong>{{ session('success') }}</strong> dibuat!
+        <strong>{{ session('success') }}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @elseif(session()->has('failed'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>{{ session('failed') }}</strong>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
     @endif
+
     <div class="row">
         <div class="col-md-6">
             <a href="/account/create" class="btn btn-success mb-3">Create Account</a>
@@ -37,14 +45,18 @@
         <tbody>
             @foreach ($accounts as $account)  
             <tr>
-                <th scope="row">{{ $account->id }}</th>
+                <th scope="row">{{ $loop->iteration }}</th>
                 <td>{{ $account->username }}</td>
                 <td>{{ $account->name }}</td>
                 <td>{{ $account->role }}</td>
                 <td>
                     <a href="/account/{{ $account->username }}" class="btn btn-success">Lihat</a>
                     <a href="/account/{{ $account->username }}/edit" class="btn btn-primary">Edit</a>
-                    <a href="" class="btn btn-danger">Hapus</a>
+                    <form action="/account/{{ $account->username }}" method="post" class="d-inline">
+                        @method('delete')
+                        @csrf
+                        <button type="submit" class="btn btn-danger" class="border-0" onclick="return confirm('Apakah Anda yakin menghapus akun ini?')">Hapus</button>
+                    </form>                    
                 </td>
             </tr>
             
